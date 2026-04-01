@@ -74,7 +74,7 @@ Tracks labor force participation rates per country per year.
 
 ## 📊 ER Diagram
 
-![ER Diagram](Final%20ER%20Diagram.drawio.png)
+<img src="Final%20ER%20Diagram.drawio.png" style="background-color:white; padding:10px;" width="100%"/>
 
 ---
 
