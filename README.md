@@ -72,9 +72,17 @@ Tracks labor force participation rates per country per year.
 
 ---
 
-## 📊 Diagrams
+## 📊 ER Diagram
 
-Both the **ER Diagram** and **Relational Schema** are available in `diagrams_group5.pdf` included in this repository.
+![ER Diagram](Final%20ER%20Diagram.drawio.png)
+
+---
+
+## 🗂️ Relational Schema
+
+![Relational Schema](drawSQL-image-export-2026-03-31.jpg)
+
+> Both diagrams are also available combined in `diagrams_group5.pdf`
 
 ---
 
