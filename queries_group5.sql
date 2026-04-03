@@ -134,13 +134,39 @@ ORDER BY Economic_Indicators.gdp_per_capita DESC;
 -- HAVING SUM(Tourism_Statistics.revenue_billion) > 100;
 -- ============================================
 
--- Query 8 (Category: AGGREGATION QUERIES): [Describe your query here]
+-- Query 8 (Category: AGGREGATION): Show average GDP per capita and average inflation rate grouped by continent
+SELECT Country.Continent,
+       COUNT(Economic_Indicators.country_code) AS num_countries,
+       ROUND(AVG(Economic_Indicators.gdp_per_capita), 2) AS avg_gdp_per_capita,
+       ROUND(AVG(Economic_Indicators.inflation_rate), 2) AS avg_inflation
+FROM Economic_Indicators
+JOIN Country ON Economic_Indicators.country_code = Country.Code
+WHERE Economic_Indicators.year = 2020
+GROUP BY Country.Continent
+ORDER BY avg_gdp_per_capita DESC;
 
+-- Query 9 (Category: AGGREGATION): Show total exports and imports grouped by continent for 2020
+SELECT Country.Continent,
+       ROUND(SUM(Trade_Statistics.exports_usd), 2) AS total_exports,
+       ROUND(SUM(Trade_Statistics.imports_usd), 2) AS total_imports,
+       ROUND(SUM(Trade_Statistics.trade_balance), 2) AS total_trade_balance
+FROM Trade_Statistics
+JOIN Country ON Trade_Statistics.country_code = Country.Code
+WHERE Trade_Statistics.year = 2020
+GROUP BY Country.Continent
+ORDER BY total_exports DESC;
 
--- Query 9 (Category: AGGREGATION QUERIES): [Describe your query here]
-
-
--- Query 10 (Category: AGGREGATION QUERIES): [Describe your query here]
+-- Query 10 (Category: AGGREGATION - HAVING): Find continents where average youth unemployment exceeds 15 percent
+SELECT Country.Continent,
+       ROUND(AVG(Labor_Force.youth_unemp), 2) AS avg_youth_unemployment,
+       ROUND(AVG(Labor_Force.female_rate), 2) AS avg_female_labor_rate
+FROM Labor_Force
+JOIN Country ON Labor_Force.country_code = Country.Code
+WHERE Labor_Force.year = 2020
+AND Labor_Force.youth_unemp IS NOT NULL
+GROUP BY Country.Continent
+HAVING AVG(Labor_Force.youth_unemp) > 15
+ORDER BY avg_youth_unemployment DESC;
 
 
 -- ============================================
