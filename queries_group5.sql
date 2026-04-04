@@ -168,7 +168,6 @@ GROUP BY Country.Continent
 HAVING AVG(Labor_Force.youth_unemp) > 15
 ORDER BY avg_youth_unemployment DESC;
 
-
 -- ============================================
 -- PART 4: RANKING QUERIES (2 queries)
 -- Must use ORDER BY; LIMIT is optional
@@ -183,7 +182,23 @@ ORDER BY avg_youth_unemployment DESC;
 -- LIMIT 5;
 -- ============================================
 
--- Query 11 (Category: RANKING QUERIES): [Describe your query here]
+-- Query 11 (Category: RANKING): Top 10 countries ranked by GDP in descending order for 2020
+SELECT Country.Name, Country.Continent,
+       Economic_Indicators.gdp_usd,
+       Economic_Indicators.gdp_per_capita
+FROM Economic_Indicators
+JOIN Country ON Economic_Indicators.country_code = Country.Code
+WHERE Economic_Indicators.year = 2020
+ORDER BY Economic_Indicators.gdp_usd DESC
+LIMIT 10;
 
-
--- Query 12 (Category: RANKING QUERIES): [Describe your query here]
+-- Query 12 (Category: RANKING): Rank all countries by trade balance from largest surplus to largest deficit for 2020
+SELECT Country.Name, Country.Continent,
+       Trade_Statistics.exports_usd,
+       Trade_Statistics.imports_usd,
+       Trade_Statistics.trade_balance
+FROM Trade_Statistics
+JOIN Country ON Trade_Statistics.country_code = Country.Code
+WHERE Trade_Statistics.year = 2020
+AND Trade_Statistics.trade_balance IS NOT NULL
+ORDER BY Trade_Statistics.trade_balance DESC;
